@@ -32,7 +32,10 @@ Sample Output
 2 3 4 1
 '''
 
+# https://docs.python.org/2/library/functions.html#raw_input
 n = int(raw_input().strip())
+# https://docs.python.org/2/library/functions.html#map
 arr = map(int,raw_input().strip().split(' '))
 
+# https://docs.python.org/2/library/functions.html#reversed
 print " ".join(str(item) for item in reversed(arr))
