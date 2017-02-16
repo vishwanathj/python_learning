@@ -65,13 +65,14 @@ class Solution:
     def insert(self, head, data):
         try:
             head.next
+        except AttributeError:
+            head = Node(data)
+        else:
             curr = head
             while curr:
                 prev = curr
                 curr = curr.next
             prev.next = Node(data)
-        except AttributeError:
-            head = Node(data)
         return head
 
 mylist= Solution()
