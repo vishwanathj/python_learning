@@ -63,5 +63,6 @@ root=None
 for i in range(T):
     data=int(raw_input())
     root=myTree.insert(root,data)
+
 height=myTree.getHeight(root)
 print height
