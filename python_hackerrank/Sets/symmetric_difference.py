@@ -1,125 +1,66 @@
 '''
-Objective
-Today, we're learning about a new data type: sets.
+.symmetric_difference()
+The .symmetric_difference() operator returns a set with all the elements that are in the set and the iterable but not both.
+Sometimes, a ^ operator is used in place of the .symmetric_difference() tool, but it only operates on the set of elements in set.
+The set is immutable to the .symmetric_difference() operation (or ^ operation).
 
-Concept
+>>> s = set("Hacker")
+>>> print s.symmetric_difference("Rank")
+set(['c', 'e', 'H', 'n', 'R', 'r'])
 
-If the inputs are given on one line separated by a space character, use split() to get the separate values in the form of a list:
+>>> print s.symmetric_difference(set(['R', 'a', 'n', 'k']))
+set(['c', 'e', 'H', 'n', 'R', 'r'])
 
->> a = raw_input()
-5 4 3 2
->> lis = a.split()
->> print (lis)
-['5', '4', '3', '2']
-If the list values are all integer types, use the map() method to convert all the strings to integers.
+>>> print s.symmetric_difference(['R', 'a', 'n', 'k'])
+set(['c', 'e', 'H', 'n', 'R', 'r'])
 
->> newlis = list(map(int, lis))
->> print (newlis)
-[5, 4, 3, 2]
-Sets are an unordered bag of unique values. A single set contains values of any immutable data type.
+>>> print s.symmetric_difference(enumerate(['R', 'a', 'n', 'k']))
+set(['a', 'c', 'e', 'H', (0, 'R'), 'r', (2, 'n'), 'k', (1, 'a'), (3, 'k')])
 
-CREATING SETS
+>>> print s.symmetric_difference({"Rank":1})
+set(['a', 'c', 'e', 'H', 'k', 'Rank', 'r'])
 
->> myset = {1, 2} # Directly assigning values to a set
->> myset = set()  # Initializing a set
->> myset = set(['a', 'b']) # Creating a set from a list
->> myset
-{'a', 'b'}
-
-
-MODIFYING SETS
-
-Using the add() function:
-
->> myset.add('c')
->> myset
-{'a', 'c', 'b'}
->> myset.add('a') # As 'a' already exists in the set, nothing happens
->> myset.add((5, 4))
->> myset
-{'a', 'c', 'b', (5, 4)}
-
-Using the update() function:
-
->> myset.update([1, 2, 3, 4]) # update() only works for iterable objects
->> myset
-{'a', 1, 'c', 'b', 4, 2, (5, 4), 3}
->> myset.update({1, 7, 8})
->> myset
-{'a', 1, 'c', 'b', 4, 7, 8, 2, (5, 4), 3}
->> myset.update({1, 6}, [5, 13])
->> myset
-{'a', 1, 'c', 'b', 4, 5, 6, 7, 8, 2, (5, 4), 13, 3}
-
-REMOVING ITEMS
-
-Both the discard() and remove() functions take a single value as an argument and removes that value from the set. If that value is not present, discard() does nothing, but remove() will raise a KeyError exception.
-
->> myset.discard(10)
->> myset
-{'a', 1, 'c', 'b', 4, 5, 7, 8, 2, 12, (5, 4), 13, 11, 3}
->> myset.remove(13)
->> myset
-{'a', 1, 'c', 'b', 4, 5, 7, 8, 2, 12, (5, 4), 11, 3}
-
-
-COMMON SET OPERATIONS Using union(), intersection() and difference() functions.
-
->> a = {2, 4, 5, 9}
->> b = {2, 4, 11, 12}
->> a.union(b) # Values which exist in a or b
-{2, 4, 5, 9, 11, 12}
->> a.intersection(b) # Values which exist in a and b
-{2, 4}
->> a.difference(b) # Values which exist in a but not in b
-{9, 5}
-
-The union() and intersection() functions are symmetric methods:
-
->> a.union(b) == b.union(a)
-True
->> a.intersection(b) == b.intersection(a)
-True
->> a.difference(b) == b.difference(a)
-False
-These other built-in data structures in Python are also useful.
-
+>>> s ^ set("Rank")
+set(['c', 'e', 'H', 'n', 'R', 'r'])
 Task
-Given 2 sets of integers, M and N, print their symmetric difference in ascending order.
-The term symmetric difference indicates those values that exist in either M or N but do not exist in both.
+Students of District College have subscriptions to English and French newspapers. Some students have subscribed to English only, some have subscribed to French only, and some have subscribed to both newspapers.
+
+You are given two sets of student roll numbers. One set has subscribed to the English newspaper, and one set has subscribed to the French newspaper. Your task is to find the total number of students who have subscribed to either the English or the French newspaper but not both.
 
 Input Format
 
-The first line of input contains an integer, M.
-The second line contains M space-separated integers.
-The third line contains an integer, N.
-The fourth line contains N space-separated integers.
+The first line contains the number of students who have subscribed to the English newspaper.
+The second line contains the space separated list of student roll numbers who have subscribed to the English newspaper.
+The third line contains the number of students who have subscribed to the French newspaper.
+The fourth line contains the space separated list of student roll numbers who have subscribed to the French newspaper.
+
+Constraints
+
+0 < Total number of students in collge < 1000
 
 Output Format
 
-Output the symmetric difference integers in ascending order, one per line.
+Output total number of students who have subscriptions to the English or the French newspaper but not both.
 
 Sample Input
 
-4
-2 4 5 9
-4
-2 4 11 12
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
 Sample Output
 
-5
-9
-11
-12
+8
+Explanation
+
+The roll numbers of students who have subscriptions to English or French newspapers but not both are:
+4,5,7,9,10,11,21 and 55.
+Hence, the total is 8 students.
 '''
 
 if __name__ == '__main__':
-    m = int(raw_input())
-    m_arr = set(map(int, raw_input().split()))
-    n = int(raw_input())
-    n_arr = set(map(int, raw_input().split()))
-    m_diff_n = m_arr.difference(n_arr)
-    n_diff_m = n_arr.difference(m_arr)
-    diff_union = m_diff_n.union(n_diff_m)
-    for item in sorted(diff_union):
-        print item
+    e = int(raw_input())
+    eng_set = set(map(int, raw_input().split()))
+    f = int(raw_input())
+    french_set = set(map(int, raw_input().split()))
+    print len(eng_set.symmetric_difference(french_set))
